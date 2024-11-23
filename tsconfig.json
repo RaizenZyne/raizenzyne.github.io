@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "rootDirs": ["src"],
-        "outDir": "backend",
+        "outDir": "dist",
         "lib": ["ES2023"],
         "target": "ES2023",
         "module": "CommonJS",
