@@ -1,13 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="description" content="Personal Web Portfolio" />
+    <meta
+      name="keywords"
+      content="rxz, raizenzyne, portfolio, personal, jessie, villanueva"
+    />
+    <meta name="author" content="Mark Jessie Villanueva" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+
+    <title>Mark Jessie Villanueva</title>
+    <link rel="icon" type="image/svg+xml" href="/omniverse.svg" />
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        user-select: none;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        #spinner.spin {
+          animation: logo-spin infinite 2s ease-in;
+        }
+      }
+
+      @keyframes logo-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #spinner {
+        height: 15em;
+        will-change: filter;
+        transition: 300ms;
+        width: 100vw;
+        margin: auto;
+      }
+
+      .bg-dark {
+        background-color: black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        align-content: center;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <div id="loader" class="bg-dark">
+      <img
+        id="spinner"
+        src="src/assets/omnitrix.svg"
+        class="spin"
+        alt="Spinning Logo"
+      />
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
