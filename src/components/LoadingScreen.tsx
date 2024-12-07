@@ -1,6 +1,7 @@
 import logo from '../assets/omnitrix.svg'
 
 export function LoadingScreen(){
+
     return(
     <>
         <div className='bg loading-screen'>

@@ -19,27 +19,10 @@
         user-select: none;
       }
 
-      @media (prefers-reduced-motion: no-preference) {
-        #spinner.spin {
-          animation: logo-spin infinite 2s ease-in;
-        }
-      }
-
-      @keyframes logo-spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      #spinner {
-        height: 15em;
-        will-change: filter;
-        transition: 300ms;
+      #matrix {
+        position: fixed;
         width: 100vw;
-        margin: auto;
+        height: 100vh;
       }
 
       .bg-dark {
@@ -50,19 +33,55 @@
         width: 100vw;
         height: 100vh;
         align-content: center;
+        opacity: 0;
+        color: white;
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
-    <div id="loader" class="bg-dark">
-      <img
-        id="spinner"
-        src="src/assets/omnitrix.svg"
-        class="spin"
-        alt="Spinning Logo"
-      />
-    </div>
+    <div id="root" class="bg-dark"></div>
+    <canvas id="matrix"></canvas>
+    <script>
+      // Initialising the canvas
+      var canvas = document.getElementById("matrix"),
+        ctx = canvas.getContext("2d");
+
+      // Setting the width and height of the canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Setting up the letters
+      var letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789";
+      letters = letters.split("");
+
+      // Setting up the columns
+      var fontSize = 10,
+        columns = canvas.width / fontSize;
+
+      // Setting up the drops
+      var drops = [];
+      for (var i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
+
+      // Setting up the draw function
+      function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, .1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < drops.length; i++) {
+          var text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillStyle = "gold";
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          drops[i]++;
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.99) {
+            drops[i] = 0;
+          }
+        }
+      }
+
+      // Loop the animation
+      setInterval(draw, 30);
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
