@@ -1,9 +1,9 @@
-import { PlexusScreen } from "../components/PlexusScreen";
+import { ParticleScreen } from "../components/ParticleScreen";
 
 export function About() {
   return (
     <>
-      <PlexusScreen />
+      <ParticleScreen />
       ABOUT
     </>
   );

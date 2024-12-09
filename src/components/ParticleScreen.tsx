@@ -20,7 +20,7 @@ class Particle {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.size = Math.random() * 5 + 1;
+    this.size = Math.random() * 1 + 1;
     this.speedX = Math.random() * 1 - 0.5;
     this.speedY = Math.random() * 1 - 0.5;
   }
@@ -44,9 +44,11 @@ class Particle {
     // const b = Math.floor(Math.random() * 255);
     // const color = "rgba(" + r + ", " + g + ", " + b + ")";
 
+    // this.size = Math.random() * 1;
+
     this.ctx.fillStyle = "white";
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     this.ctx.fill();
   };
 }
@@ -59,33 +61,10 @@ const animateParticles = (
 ) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  let i: number;
-  let j: number;
-  let dx: number;
-  let dy: number;
-  let distance: number;
-
   // Update and draw each particle
-  for (i = 0; i < particles.length; i++) {
+  for (let i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].draw();
-  }
-
-  // Draw lines between particles if they are close enough
-  for (i = 0; i < particles.length; i++) {
-    for (j = i; j < particles.length; j++) {
-      dx = particles[i].x - particles[j].x;
-      dy = particles[i].y - particles[j].y;
-      distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 100) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 100})`;
-        ctx.lineWidth = 1;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
-    }
   }
 
   // Call the animate function again to keep it looping
@@ -94,9 +73,11 @@ const animateParticles = (
   });
 };
 
-export function PlexusScreen() {
+export function ParticleScreen() {
   useEffect(() => {
-    const canvas = document.getElementById("plexusCanvas") as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      "particleCanvas"
+    ) as HTMLCanvasElement;
     if (canvas) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -120,7 +101,6 @@ export function PlexusScreen() {
           animateParticles(particles, canvas, ctx);
         });
 
-        // Resize canvas on window resize
         window.addEventListener("resize", () => {
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
@@ -135,7 +115,7 @@ export function PlexusScreen() {
 
   return (
     <canvas
-      id="plexusCanvas"
+      id="particleCanvas"
       style={{
         position: "fixed",
         top: 0,

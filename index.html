@@ -15,6 +15,7 @@
 
     <style type="text/css">
       body {
+        background-color: black;
         margin: 0;
         user-select: none;
       }
@@ -51,36 +52,41 @@
       canvas.height = window.innerHeight;
 
       // Setting up the letters
-      var letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789";
+      var letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789(){}[]#$%&<>?;:!";
       letters = letters.split("");
 
       // Setting up the columns
-      var fontSize = 10,
-        columns = canvas.width / fontSize;
-
+      var fontSize = 10;
+      var columns = canvas.width / fontSize;
+      var rows = canvas.height / fontSize;
       // Setting up the drops
       var drops = [];
       for (var i = 0; i < columns; i++) {
-        drops[i] = 1;
+        drops[i] = rows;
       }
 
       // Setting up the draw function
       function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, .1)";
+        ctx.fillStyle = "rgba(0, 0, 0, .05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0; i < drops.length; i++) {
+        for (var i = drops.length - 1; i > 0; i--) {
           var text = letters[Math.floor(Math.random() * letters.length)];
           ctx.fillStyle = "gold";
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          drops[i]++;
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.99) {
-            drops[i] = 0;
+          drops[i]--;
+          if (drops[i] * fontSize < 0) {
+            drops[i] = rows;
           }
         }
+
+        setTimeout(() => {
+          requestAnimationFrame(draw);
+        }, 30);
       }
 
-      // Loop the animation
-      setInterval(draw, 30);
+      requestAnimationFrame(() => {
+        draw();
+      });
     </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>

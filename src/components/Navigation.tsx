@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -10,7 +10,8 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import InfoIcon from "@mui/icons-material/Info";
 
 export default function Navigation() {
-  const [value, setValue] = React.useState(0);
+  const location = useLocation();
+  const [value, setValue] = React.useState(location.pathname.replace("/", ""));
   const navigate = useNavigate();
 
   return (
@@ -30,10 +31,10 @@ export default function Navigation() {
         >
           <BottomNavigationAction
             label="Home"
-            value="home"
+            value=""
             icon={<HomeIcon />}
             onClick={() => {
-              navigate("/home");
+              navigate("/");
             }}
           />
           <BottomNavigationAction

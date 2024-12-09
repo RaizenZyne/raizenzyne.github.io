@@ -1,69 +1,71 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export function MatrixScreen(){
+export function MatrixScreen() {
+  const frame = useRef(0);
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+  const fontSize = 10;
 
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789';
-    const letters = characters.split('');
-    const fontSize = 10;
+  useEffect(() => {
+    const letters = characters.split("");
+    const canvas = document.getElementById("matrix-bg") as HTMLCanvasElement;
+    if (canvas) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let columns = canvas.width / fontSize;
 
-    useEffect(()=>{
-        // Initialising the canvas
-        const canvas = document.querySelector('canvas')
-        if(canvas){        
-            // Setting the width and height of the canvas
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const columns = canvas.width / fontSize;
-            
-            let drops = [];
-            for (let i = 0; i < columns; i++) {
-                drops[i] = 1;
+      const drops: number[] = [];
+      for (let i = 0; i < 256; i++) {
+        drops[i] = 0;
+      }
+
+      function draw() {
+        columns = canvas.width / fontSize;
+
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.fillStyle = "rgba(0, 0, 0, .03)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < columns; i++) {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillStyle = "silver";
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            drops[i]++;
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.99) {
+              drops[i] = 0;
             }
-
-            const ctx = canvas.getContext('2d');
-            
-
-            function Texts(){
-
-            }
-
-            Texts.prototype.draw = () => {
-                if(ctx){
-                    ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    for (let i = 0; i < drops.length; i++) {
-                        let text = letters[Math.floor(Math.random() * letters.length)];
-                        ctx.fillStyle = '#0f0';
-                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                        drops[i]++;
-                        if (drops[i] * fontSize > canvas.height && Math.random() > .95) {
-                            drops[i] = 0;
-                        }
-                    }    
-                }
-            }
-
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            return () => {
-                window.removeEventListener('resize', () => {});
-            };
+          }
         }
-    }, []);
 
-    return(
-        <canvas
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-            }}
-        />
-    )
+        setTimeout(() => {
+          frame.current = requestAnimationFrame(draw);
+        }, 120);
+      }
+
+      frame.current = requestAnimationFrame(draw);
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      return () => {
+        window.removeEventListener("resize", () => {});
+        cancelAnimationFrame(frame.current);
+      };
+    }
+  }, []);
+
+  return (
+    <canvas
+      id="matrix-bg"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+      }}
+    />
+  );
 }

@@ -4,8 +4,8 @@
         animation: blink 2s ease-in-out 0.5s infinite;        
     }
 
-    #root {
-        animation: fade 1s ease-in 3s 1 forwards;
+    .fade {
+        animation: fade 0.2s ease-in 0s 1 forwards;
     }
 
     .move-out {
