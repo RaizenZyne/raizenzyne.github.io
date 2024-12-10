@@ -11,37 +11,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Mark Jessie Villanueva</title>
-    <link rel="icon" type="image/png" href="/assets/omniverse-BOn2Ydl_.png" />
+    <link rel="icon" type="image/png" href="omniverse.png" />
 
     <style type="text/css">
+      :root {
+        color-scheme: light dark;
+      }
+
       body {
+        overflow-y: auto;
         margin: 0;
         user-select: none;
+      }
+
+      .animation-scroll {
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
       }
 
       #matrix {
         position: fixed;
         width: 100vw;
         height: 100vh;
+        z-index: 1000;
       }
 
-      .bg-dark {
-        background-color: black;
+      #root {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh;
         align-content: center;
         opacity: 0;
-        color: white;
+        overflow: auto;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-VeHm0j-K.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BuxfCJi1.css">
+    <script type="module" crossorigin src="/assets/index-utkH5G12.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bof7Ffql.css">
   </head>
   <body>
-    <div id="root" class="bg-dark"></div>
+    <div id="root"></div>
     <canvas id="matrix"></canvas>
     <script>
       // Initialising the canvas
@@ -53,36 +62,41 @@
       canvas.height = window.innerHeight;
 
       // Setting up the letters
-      var letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789";
+      var letters = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789(){}[]#$%&<>?;:!";
       letters = letters.split("");
 
       // Setting up the columns
-      var fontSize = 10,
-        columns = canvas.width / fontSize;
-
+      var fontSize = 10;
+      var columns = canvas.width / fontSize;
+      var rows = canvas.height / fontSize;
       // Setting up the drops
       var drops = [];
       for (var i = 0; i < columns; i++) {
-        drops[i] = 1;
+        drops[i] = rows;
       }
 
       // Setting up the draw function
       function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, .1)";
+        ctx.fillStyle = "rgba(0, 0, 0, .05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0; i < drops.length; i++) {
+        for (var i = drops.length - 1; i > 0; i--) {
           var text = letters[Math.floor(Math.random() * letters.length)];
           ctx.fillStyle = "gold";
           ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          drops[i]++;
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.99) {
-            drops[i] = 0;
+          drops[i]--;
+          if (drops[i] * fontSize < 0) {
+            drops[i] = rows;
           }
         }
+
+        setTimeout(() => {
+          requestAnimationFrame(draw);
+        }, 30);
       }
 
-      // Loop the animation
-      setInterval(draw, 30);
+      requestAnimationFrame(() => {
+        draw();
+      });
     </script>
   </body>
 </html>

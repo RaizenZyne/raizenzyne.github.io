@@ -14,35 +14,43 @@
     <link rel="icon" type="image/png" href="omniverse.png" />
 
     <style type="text/css">
+      :root {
+        color-scheme: light dark;
+      }
+
       body {
-        background-color: black;
+        overflow-y: auto;
         margin: 0;
         user-select: none;
+      }
+
+      .animation-scroll {
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
       }
 
       #matrix {
         position: fixed;
         width: 100vw;
         height: 100vh;
+        z-index: 1000;
       }
 
-      .bg-dark {
-        background-color: black;
+      #root {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh;
         align-content: center;
         opacity: 0;
-        color: white;
+        overflow: auto;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-J4r9IDoA.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DNq38wg1.css">
+    <script type="module" crossorigin src="/assets/index-utkH5G12.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bof7Ffql.css">
   </head>
   <body>
-    <div id="root" class="bg-dark"></div>
+    <div id="root"></div>
     <canvas id="matrix"></canvas>
     <script>
       // Initialising the canvas
