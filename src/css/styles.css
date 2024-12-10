@@ -1,3 +1,4 @@
+
 @media (prefers-reduced-motion: no-preference) {
 
     .logo.blink {
@@ -12,18 +13,6 @@
         animation: move-down 1s ease-in-out 5s 1 forwards;
     }
 }  
-
-@keyframes blink {
-    0% {
-        filter: drop-shadow(0 0 2em #8ce309);
-    }
-    50% {
-        filter: drop-shadow(0 0 5em #8ce309);
-    }
-    100% {
-        filter: drop-shadow(0 0 2em #8ce309);
-    }
-}
 
 @keyframes fade {
     from {
