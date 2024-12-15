@@ -1,0 +1,32 @@
+#navbar {
+    position: fixed;
+    bottom: 1rem;
+    right: 0;
+    left: 0;
+    width: 300px;
+    margin-inline: auto;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    backdrop-filter: blur(2rem);
+    box-shadow: 0 0 0.5rem gold;
+    z-index: 999;
+}
+
+#navbar ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar ul li {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    display: grid;
+    place-items: center;
+    text-shadow: 0 0 5px red;
+ }
+
+li a {
+    color: gold;
+}

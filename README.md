@@ -1,29 +1,21 @@
-# Vite React TypeScript Material UI
+# React + TypeScript + Vite
+
+#
 
 > npm create vite
 
 #
 
-> npm i @mui/material @emotion/react @emotion/styled
+> npm install
 
 #
 
-> npm i @fortawesome/fontawesome-svg-core
+> npm install @emailjs/browser
 
 #
 
-> npm i @fortawesome/free-solid-svg-icons
+> npm install react-bootstrap bootstrap
 
 #
 
-> npm i @fortawesome/free-regular-svg-icons
-
-#
-
-> npm i @fortawesome/free-brands-svg-icons
-
-#
-
-> npm i @fortawesome/react-fontawesome@latest
-
-#
+> npm i @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome

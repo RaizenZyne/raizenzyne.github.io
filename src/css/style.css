@@ -1,0 +1,57 @@
+:root {
+    font-family: monospace;
+    --bg-color: white;
+    --text-color: black;
+    --linear: linear-gradient(90deg, var(--bg-color), var(--text-color));
+}
+
+.dark-mode {
+    --bg-color: black;
+    --text-color: white;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    /* background-image: var(--linear); */
+    background-repeat: no-repeat;
+}
+
+#root {
+    height: 100vh;
+    overflow: auto;
+    scroll-snap-type: both mandatory;
+    scroll-behavior: smooth;
+}
+
+#main, #skills, #exp, #about, #contact {
+    height: 100vh;
+    scroll-snap-align: center;
+}
+
+#contact {
+    background-image: linear-gradient(0deg, black, silver, black);
+}
+
+input, button, textarea {
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}

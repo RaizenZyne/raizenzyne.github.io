@@ -35,114 +35,58 @@
     }
 }
 
-@keyframes grow {
-    0% {
-        width: 100%;    
-        left: 0%;
-        top: -75%;
-    }
-    100% {
-        width: 1%;    
-        left: 50%;
-        top: 200%;
-    }
-}
-
-.person {
-    position: absolute;
-    transform-style: preserve-3d;
-    animation: aura 10s ease-in-out 0s infinite, grow linear both;
-    
-    animation-timeline: view();
-    animation-range: cover;
-}
-
-
 
 .banner {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+
     width: 100%;
     height: 100vh;
     text-align: center;
     overflow: hidden;
     position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 
-@keyframes runGroup1 {
+@keyframes autoRun {
     0% {
-        transform: var(--perspective) rotateZ(90deg) rotateY(0deg);
+        transform: var(--perspective) rotateX(-5deg) rotateY(0deg);
     }
     100% {
-        transform: var(--perspective) rotateZ(90deg) rotateY(360deg);
+        transform: var(--perspective) rotateX(-5deg) rotateY(360deg);
     }
 }
 
-@keyframes runGroup2 {
-    0% {
-        transform: var(--perspective) rotateZ(30deg) rotateY(0deg);
-    }
-    100% {
-        transform: var(--perspective) rotateZ(30deg) rotateY(360deg);
-    }
-}
-
-@keyframes runGroup3 {
-    0% {
-        transform: var(--perspective) rotateZ(-30deg) rotateY(360deg);
-    }
-    100% {
-        transform: var(--perspective) rotateZ(-30deg) rotateY(0deg);
-    }
-}
-
-.banner .slider {
+.banner .person {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    top: calc(50% - 16px);
-    left: calc(50% - 16px);
+    width: 320px;
+    left: calc(50vw - 160px);
+    bottom: 5rem;
+    animation: aura 10s linear infinite;
+}
+
+.banner > .slider {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    bottom: 35%;
+    left: calc(50% - 32px);
     transform-style: preserve-3d;
-    --perspective: perspective(32vh);
+    --perspective: perspective(1280px);
     transform: var(--perspective);
-    /* animation: autoRun 10s linear infinite; */
+    animation: autoRun 60s linear infinite;
 }
 
 .banner .slider .item {
     position: absolute;
     inset: 0 0 0 0;
-}
-
-.slider.group1 {
-        animation: runGroup1 24s linear infinite;
-}
-
-.slider.group2 {
-    transform: rotateZ(30deg);
-    animation: runGroup2 24s linear -1s infinite;
-}
-
-.slider.group3 {
-    transform: rotateZ(-30deg);
-    animation: runGroup3 24s linear -3s infinite;
-}
-
-.slider.group1 .item{
     transform: 
-        rotateY(calc((((var(--position) - 1) * 3)) * (360 / var(--quantity)) * 1deg))
-        translateZ(720px) rotate(-90deg);
+        rotateY(calc(((var(--position) - 1)) * (360 / var(--quantity)) * 1deg))
+        translateZ(640px);
 }
-
-.slider.group2 .item{
-    transform: 
-        rotateY(calc((((var(--position) - 1) * 3) + 1) * (360 / var(--quantity)) * 1deg))
-        translateZ(720px) rotate(-30deg);
-}
-
-.slider.group3 .item{
-    transform: 
-        rotateY(calc((((var(--position) - 1) * 3) + 2) * (360 / var(--quantity)) * 1deg))
-        translateZ(720px) rotate(30deg);
-}
-
 
 .banner .slider .item img{
     width: 100%;
@@ -150,6 +94,9 @@
     object-fit: cover;
 }
 
+.slider:hover {
+    animation-play-state: paused!important;
+}
 
 .blur {
     position: absolute;

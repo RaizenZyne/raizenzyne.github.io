@@ -1,3 +1,0 @@
-Options +FollowSymLinks
-RewriteEngine On
-RewriteRule ^subdirectory/(.*)$ /dist/$1 [R=301,NC,L]

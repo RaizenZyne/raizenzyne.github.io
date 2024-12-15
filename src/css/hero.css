@@ -1,0 +1,49 @@
+.intro {
+    position: relative;
+    top: -65%;
+    bottom: unset;
+    left: 50%;
+    width: clamp(300px, 90vw, 820px);
+    height: min-content;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: clamp(0.5rem, 1vw, 1rem);
+    margin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.intro a {
+    color: gray;
+    font-size: clamp(1rem, 1vw, 2rem);
+    font-weight: 900;
+    margin: clamp(1rem, 1vw, 2rem);
+    padding: clamp(1rem, 1vw, 2rem);
+    border: 3px outset gold;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+}
+
+.intro h1 {
+    font-size: clamp(1.8rem, 7vw, 5rem);
+    font-weight: 900;
+    background: linear-gradient(0deg, black,gold, black);
+    background-clip: text;
+    color: transparent;
+    margin: 0;
+}
+.intro h2 {
+    font-size: clamp(1.2rem, 4vw, 3rem);
+    background: linear-gradient(0deg,black, silver, black);
+    background-clip: text;
+    color: transparent;
+}
+.intro p {
+    font-size: clamp(0.8rem, 1vw, 2rem);
+    text-shadow: 0 0 3px gray;
+}
